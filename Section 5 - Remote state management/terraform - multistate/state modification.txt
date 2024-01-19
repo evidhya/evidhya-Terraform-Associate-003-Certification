@@ -1,0 +1,6 @@
+List = list resources within Terrafrom state file ( terraform state list)
+mv   = moves items with terraform state (terraform state mv <file1> <file2>)
+pull = manually download and output the state from remote state ( terraform state pull )
+push =  manually upload a local state file to the remote state (terraform state push )
+rm   = remove items from the terraform state  (terraform state rm <file name>)
+show =  the attributes of a single resource in the state (terraform state show aws_instance.myec2)

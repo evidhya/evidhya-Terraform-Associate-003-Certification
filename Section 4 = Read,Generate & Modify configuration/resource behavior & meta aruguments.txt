@@ -1,0 +1,58 @@
+A resource block declares that you want a particular infrastructure object to exist within the given settings
+
+How terraform applies a configuration ?
+1.The terraform creates the resource that exists within the configuration file but are not associated with a real infrastructure object. 
+2.Terraform will destroy the resources that exist in the state but no longer exist in the configuration.
+3.Update in place resources whose arguments have changed.  
+4.Destroy and recreate resources whose arguments have changed but which cannot be updated in place due to remote api limitations.
+
+How does meta-arguments work ? or What happends if we want to change the default behavior ?
+resource "aws_instance" "web" {
+    ami = "XXXXX"
+    instance_type = "t2.medium"
+
+    tags = {
+        Name = "Helloworld"
+    }
+}
+From above usecase Name = Helloworld is given via terraform in the form of tags Env: Production is given as manually
+"Ignore this specific manual change to be present with out terraform interfeaing with it, so to change the default
+behavior of the resource object meta arguments comes into picture
+
+Using Meta arguments :
+Terraform  allows us to include meta argument within the resource block which allows some details of this standard resource behaviour to be customised on a pre resource basis.
+
+Different Meta-argument
+Depends on: handle hidden resources or module dependencies that Terraform cannot automatically infer 
+count: accepts a whole number and creates that many instances of the resources 
+for each: accepts a map or a set of things and creates an instance for each item in that map or set.
+lifecycle: allows modification of the resource’s lifecycle 
+provider: specifies which provider configuration to use for a resource overriding terraform default behaviour of selection one based on the resource type name.
+
+lifecycle meta argument
+Create_before_destroy: A new replacement object is created first and the prior object is destroyed after the replacement is created 
+Prevent_destroy:  terraform to reject with an error any plan that would destroy the infrastructure object associated with the resource.
+Ignore_changes: ignore certain changes to the live resource that do not match the configuration.
+Replace_triggered_by: replaces the resources when any of the referenced items change.
+
+LIFECYCLE META-ARUGUMENT - CREATE BEFORE DESTROY 
+By default, when Terraform must change the resource argument that cannot be updated in place due to the remote API limitation terraform will instead destroy the existing object and then create the new replacement object with the newly configured argument.
+Example: change the AMI id (operating system) Terraform will create a new linux machine & will destory windows.
+
+PREVENT DESTROY ARUGUMENT
+this specific argument will allow us to tell terror form to prevent any destruction of resource
+
+IGNORE CHANGES ARUGUMENT
+
+
+CHALLENGES WITH COUNT META ARUGUMENT
+DATA TYPES:
+1. LIST : Lists are used to store multiple items in a single variable
+          List items are ordered changeable and allow duplicate values 
+          List items are indexed the first item has index 0 the 2nd item has index 1 etc
+2. SET: SET is used to store multiple items in a single variable.
+        SET items are unordered and non-duplicates allowed
+3. TOSET: toser function will convert list of values to set
+
+FOR EACH : for_each makes use of map/set as an index value of the created resource
+          

@@ -1,0 +1,10 @@
+A comment is a text note added to source code to provide explanatory information, usually about the functions of the code
+''''
+    ''''
+
+#                 : Begins a single line comment, ending at the end of the line.
+
+//                : Begins a single line comment, as an alternative to #
+
+/*                : are start and end delimiters for a comment that might span over mutliple lines.
+*/

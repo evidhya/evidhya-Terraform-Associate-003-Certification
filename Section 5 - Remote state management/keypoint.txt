@@ -1,0 +1,38 @@
+Never store keys, etc int git. Also never commit terraform.statefile to git repo
+Supported Module source : The source argument in a module block tells Terraform where to find the source code for the desired child module.
+1.local path
+2. Terraform Registry
+3. GitHub
+4. BitBucket
+5. Generic Git, Mercurial repositories
+6. HTTP URLs
+7. S3 Bucket
+8. GCS Bucket
+
+1.local Path: A local Path must begib with either ./ or ../ to indicate that a local path is intended.
+module "consul" {
+    source = "../consul"
+}
+
+2. Arbitrary Git repositories can be used by prefixing the address with the specific git:: prefix 
+ After this prefix any valid git url can be specified to select one of the protocol supported by Git
+
+module "vpc" {
+    source = "git::https://example.com/vpc.git"
+}
+
+module "consul" {
+    source = "github.com/hashicorp/example # https
+}
+
+module "storage" {
+    source = "git@github.com:hashicorp/example" # ssh
+}
+
+Referencing to a branch: you can overwrite this using the ref argument: the value of the ref argument  can be any reference that would be accepted by the git checkout command including branch and the tag name
+
+module "vpc" {
+    source = "git::https://example.com/vpc.git?ref=v1.2.0
+}
+
+3. 

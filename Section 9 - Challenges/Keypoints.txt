@@ -1,0 +1,13 @@
+https://github.com/zealvora/kplabs-terraform-challenges
+Each challenges will tets you in different areas of terraform that will help you gain some kind of hands-on experience 
+1. troubleshoot 2. secure 3. optimize 4. Analyze
+
+challenge - 1 (Provider)
+1. create infrastructure using the provided code (withou modification).
+2. verify if the code works in the latest version of terraform and Provider.
+3. Modify and fix the code so that it works with latest version of terraform.
+
+Challenge -2 ( variables)
+1. Ensure the code is working and resource gets created
+2. Do Not delete the existing terraform.lock.hcl file. File is free to be modified based on requirement
+3. Demonstrate ability to Modify variables "splunk" from 8088 to 8089 without modifying the terraform code
